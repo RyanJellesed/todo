@@ -5,33 +5,35 @@ var todo = [taskOne, taskTwo];
 
 todo.forEach(function(todo){
 	$list.append('<tr> <td>' + todo.name + '</td><td>' + todo.date + '\
-			</td><td><input type="checkbox"></td></tr>'
-			);
-})
+			</td><td><button class="btn btn-primary deleteTodo">done</button></td></tr>'
+			)
+});
 
-
-  
-
-
+var deleteTodo = function(event){
+	event.preventDefault();
+	alert("it worked")
+	$(event.target).closest('tr').remove();
+ }
 
 function createNewTodoFromForm(event){
 	event.preventDefault();
+	$('.deleteTodo').on('click', deleteTodo)
 
 	var taskName=$("#taskName").val();
 	var dueDate=$("#dueDate").val();
 
 	if(taskName && dueDate){
 	$list.append('<tr> <td>' + taskName + '</td><td>' + dueDate + '\
-		</td><td><input type="checkbox"></td></tr>'
-		);				
+			</td><td><button class="btn btn-primary deleteTodo">done</button></td></tr>'
+			)			
 
 	}
-	console.log('it worked!',$inputs);
-	return false;
-
-}
+}	
+	
 
 $('#submit-button').on('click', createNewTodoFromForm)
+$('.deleteTodo').on('click', deleteTodo)
+
 
 
 
